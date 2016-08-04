@@ -9,6 +9,28 @@ import {
   Navigator
 } from 'react-native';
 
+const COLOR = {
+  BLUE: '#2196f3',
+  GREEN: '#8bc34a',
+  ORANGE: '#ff9800',
+  TEAL: '#009688',
+  RED: '#F44336',
+  BROWN: '#795548',
+  PURPLE: '#673ab7'
+}
+
+class Cuadro extends Component {
+  render() {
+    return (
+      <TouchableHighlight style={{backgroundColor: this.props.color, flex: 1, borderWidth: 2,
+         flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}} onPress={this.props.handler}>
+        <Text style={{color: 'white', fontSize: 20, fontWeight: 'bold'}}>
+          {this.props.children}
+        </Text>
+      </TouchableHighlight>
+    );
+  }
+}
 /**
  * Auxiliar component
  */
@@ -29,14 +51,37 @@ class Main extends Component {
 
   render() {
     return (
-      <View>
-        <Text>Hello David, this is the main view</Text>
-        <TouchableHighlight onPress={this.navigate}>
-          <Text>
-            Go to the next page mate!
-          </Text>
-        </TouchableHighlight>
+      <View style={styles.container}>
+        
+        <View style={styles.firstRow}>
+          <View style={styles.leftColumn}>
+            <Cuadro handler={this.navigate} color={COLOR.BLUE}> 1 </Cuadro>
+            <Cuadro color={COLOR.TEAL}> 2 </Cuadro>
+          </View>
+          
+          <View style={styles.rightColumn}>
+            <Cuadro color={COLOR.ORANGE}> 3 </Cuadro>
+          </View>
+        </View>
+        
+        <View style={styles.secondRow}>
+          <View style={styles.bottomLeft}>
+            <Cuadro color={COLOR.RED}> 4 </Cuadro>
+          </View>
+
+          <View style={styles.bottomCenter}>
+            <Cuadro color={COLOR.GREEN}> 5 </Cuadro>
+          </View>
+
+          <View style={styles.bottomRight}>
+            <Cuadro color={COLOR.BROWN}> 6 </Cuadro>
+            <Cuadro color={COLOR.PURPLE}> 7 </Cuadro>
+          </View>
+          
+        </View>
+
       </View>
+
     );
   }
 
@@ -101,5 +146,38 @@ class NavigatorExample extends Component {
 
 
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+  },
+  firstRow: {
+    flex: 6,
+    flexDirection: 'row' 
+  },
+  leftColumn: {
+    flex: 2,
+  },
+  rightColumn: {
+    flex: 4,
+  },
+  secondRow: {
+    flex: 3,
+    flexDirection: 'row'
+  },
+  bottomLeft: {
+    flex: 2,
+
+  },
+  bottomRight: {
+    flex: 1,
+    flexDirection: 'column',
+  },
+
+  bottomCenter: {
+    flex: 3
+  },
+});
 
 AppRegistry.registerComponent('NavigatorExample', () => NavigatorExample);
